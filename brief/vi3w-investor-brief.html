@@ -1,0 +1,426 @@
+<title>Vi3W Investor Brief</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: two A4 sheets. Black header band, lime as the single accent, white paper, two-column card grid. */
+:root{
+  --ink:#0B0B0C;
+  --paper:#FFFFFF;
+  --lime:#D4F77C;       /* brand neon/lime from vi3w.in deck */
+  --lime-deep:#3F6B00;  /* lime family, dark enough for text on white */
+  --tint:#F3FAE3;
+  --mute:#585E54;
+  --line:#E2E6DA;
+  --soft:#F6F7F3;
+  --font:"Urbanist","Segoe UI","Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+html,body{background:#E9EBE5}
+body{margin:0;font-family:var(--font);color:var(--ink);font-size:9pt;line-height:1.36;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px;}
+.page{width:210mm;height:297mm;max-width:100%;margin:0 auto 20px;background:var(--paper);padding:9mm 11mm 8mm;
+  display:flex;flex-direction:column;gap:3.2mm;overflow:hidden;box-shadow:0 2px 14px rgba(20,30,10,.12)}
+@media print{
+  html,body{background:var(--paper)}
+  body{padding:0}
+  .page{margin:0;box-shadow:none;page-break-after:always;break-after:page}
+  .page:last-child{page-break-after:auto;break-after:auto}
+}
+h1,h2,h3,p{margin:0}
+h2{font-size:13pt;font-weight:800;letter-spacing:-.01em;display:flex;align-items:center;gap:6px;text-wrap:balance}
+h2 .n{font-size:7pt;font-weight:700;color:var(--ink);background:var(--lime);border-radius:3px;padding:1px 4px;letter-spacing:.04em}
+h3{font-size:9.5pt;font-weight:700}
+b,strong{font-weight:800}
+.num{font-variant-numeric:tabular-nums}
+.hl{background:linear-gradient(transparent 55%,var(--lime) 55%);padding:0 1px}
+.muted{color:var(--mute)}
+.tbd{color:#8A5A00;background:#FFF2CC;border-radius:3px;padding:0 3px;font-weight:700;font-size:7.5pt;white-space:nowrap}
+ul{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:3px}
+ul li{position:relative;padding-left:11px}
+ul li::before{content:"";position:absolute;left:0;top:.52em;width:5px;height:5px;background:var(--ink);border-radius:1px}
+
+/* Header band */
+.hdr{background:var(--ink);color:var(--paper);border-radius:10px;padding:4.5mm 5mm;display:flex;align-items:center;gap:4mm}
+.hdr img{width:15mm;height:15mm;border-radius:50%;flex:none}
+.hdr .id{flex:1;min-width:0}
+.hdr h1{font-size:23pt;font-weight:800;letter-spacing:-.02em;line-height:1}
+.hdr h1 span{color:var(--lime)}
+.hdr .tag{font-size:11pt;color:var(--lime);font-weight:600;margin-top:3px}
+.hdr .meta{display:grid;grid-template-columns:auto auto;gap:2px 10px;font-size:8pt;color:#D9DCD4;text-align:left}
+.hdr .meta b{color:var(--paper);font-weight:700}
+.hdr .pill{display:inline-block;background:var(--lime);color:var(--ink);font-weight:800;border-radius:20px;padding:1px 8px;font-size:7.5pt;letter-spacing:.04em;text-transform:uppercase}
+
+/* KPI strip */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm}
+.kpi{border:1.5px solid var(--ink);border-radius:9px;padding:2.6mm 3mm;display:flex;flex-direction:column;gap:1px}
+.kpi.accent{background:var(--lime);border-color:var(--lime)}
+.kpi .v{font-size:21pt;font-weight:800;letter-spacing:-.02em;line-height:1.05;font-variant-numeric:tabular-nums}
+.kpi .l{font-size:8pt;font-weight:700}
+.kpi .s{font-size:7.3pt;color:var(--mute)}
+.kpi.accent .s{color:#2E3A12}
+
+/* Grid + cards */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:3mm}
+.page > *{flex:none}
+.card{background:var(--soft);border-radius:9px;padding:3mm 3.4mm;display:flex;flex-direction:column;gap:2mm;min-width:0}
+.card.plain{background:transparent;border:1px solid var(--line)}
+.card.dark{background:var(--ink);color:var(--paper)}
+.card.dark h2 .n{background:var(--lime)}
+.card.dark .muted{color:#BFC4B8}
+.span2{grid-column:1 / -1}
+.stat{display:flex;align-items:center;gap:3mm;background:var(--paper);border-radius:7px;padding:2mm 2.6mm;border-left:0}
+.stat .big{font-size:15pt;font-weight:800;line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
+.stat .big small{font-size:8pt;font-weight:700;color:var(--mute)}
+
+/* Flow */
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:1.6mm}
+.step{background:var(--paper);border-radius:7px;padding:2mm 2.2mm;display:flex;flex-direction:column;gap:1mm}
+.step .ic{width:7mm;height:7mm;border-radius:6px;background:var(--ink);display:grid;place-items:center}
+.step .ic svg{width:4.4mm;height:4.4mm}
+.step.mid .ic{background:var(--lime)}
+.step h3{font-size:9pt}
+.step p{font-size:7.8pt;color:var(--mute)}
+.arrow{align-self:center;font-weight:800;font-size:12pt}
+.live{display:flex;flex-wrap:wrap;gap:3px 4px;font-size:7.6pt}
+.chip{border-radius:20px;padding:1px 7px;font-weight:700;background:var(--lime)}
+.chip.next{background:var(--paper);border:1px dashed var(--ink)}
+
+/* Team */
+.team{display:grid;grid-template-columns:1.55fr 1fr;gap:3mm}
+.founder{display:flex;gap:3mm;align-items:flex-start}
+.avatar{width:13mm;height:13mm;border-radius:50%;background:var(--lime);display:grid;place-items:center;font-weight:800;font-size:12pt;flex:none}
+.logos{display:flex;flex-wrap:wrap;gap:3px}
+.logos span{border:1px solid var(--ink);border-radius:5px;padding:0 5px;font-weight:700;font-size:7.6pt;background:var(--paper)}
+
+/* Market */
+.mkt{display:grid;grid-template-columns:38mm 1fr;gap:3mm;align-items:center}
+.mrow{display:grid;grid-template-columns:11mm 1fr;gap:2mm;align-items:baseline;padding:1mm 0;border-bottom:1px solid var(--line)}
+.mrow:last-child{border-bottom:0}
+.mrow .k{font-weight:800;font-size:8pt}
+.mrow .v{font-size:12pt;font-weight:800;font-variant-numeric:tabular-nums}
+.mrow .x{font-size:7.6pt;color:var(--mute)}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;font-size:8pt;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:1mm 1.2mm;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:7.3pt;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);font-weight:700}
+tr.us td{background:var(--tint);font-weight:700}
+td.c,th.c{text-align:center;white-space:nowrap}
+.y{font-weight:800}
+.p{color:var(--mute)}
+.no{color:#A5AA9F}
+.econ{display:grid;grid-template-columns:1fr 1fr;gap:1.6mm}
+.econ > div{background:var(--paper);border-radius:7px;padding:1.2mm 2mm;display:flex;align-items:baseline;gap:2mm}
+.econ .v{white-space:nowrap;font-size:11pt;font-weight:800;font-variant-numeric:tabular-nums}
+.econ .l{font-size:7.3pt;color:var(--mute)}
+
+/* Timeline */
+.tl{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:2mm;padding-top:5mm}
+.tl::before{content:"";position:absolute;left:2mm;right:2mm;top:2mm;height:2px;background:var(--ink)}
+.tl div{position:relative;font-size:7.7pt}
+.tl div::before{content:"";position:absolute;top:-4.3mm;left:0;width:9px;height:9px;border-radius:50%;background:var(--paper);border:2px solid var(--ink)}
+.tl div.done::before{background:var(--lime)}
+.tl b{display:block;font-size:8.2pt}
+
+/* Ask */
+.ask{display:grid;grid-template-columns:auto 1fr;gap:5mm;align-items:center}
+.ask .amt{font-size:28pt;font-weight:800;color:var(--lime);line-height:1;letter-spacing:-.02em}
+.funds{display:flex;height:7mm;border-radius:5px;overflow:hidden;gap:2px;background:var(--ink)}
+.funds div{display:flex;align-items:center;padding-left:2mm;font-weight:800;font-size:8pt}
+.legend{display:grid;grid-template-columns:repeat(4,auto);gap:1mm 3mm;font-size:7.6pt;margin-top:1.5mm;color:#DDE0D8}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:-1px;border:1px solid #fff3}
+
+.risk{display:grid;grid-template-columns:1fr 1.25fr;gap:0}
+.risk div{padding:1.3mm 1.6mm;border-bottom:1px solid var(--line);font-size:8pt}
+.risk .h{font-size:7.3pt;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);font-weight:700}
+
+.foot{margin-top:auto;display:flex;flex-wrap:wrap;gap:2mm 6mm;align-items:center;justify-content:space-between;border-top:2px solid var(--ink);padding-top:2.2mm;font-size:8.2pt}
+.foot b{font-size:9pt}
+.foot .vis{flex-basis:100%;font-size:9pt;font-weight:700}
+.foot .vis span{background:var(--lime);padding:0 3px}
+.pg{font-size:7.3pt;color:var(--mute)}
+
+@media screen and (max-width:820px){
+  .page{width:100%;height:auto;padding:16px}
+  .grid,.team,.mkt,.ask{grid-template-columns:1fr}
+  .kpis{grid-template-columns:1fr 1fr}
+  .flow{grid-template-columns:1fr}
+  .arrow{transform:rotate(90deg);justify-self:center}
+  .tl{grid-template-columns:1fr 1fr}
+  .tl::before{display:none}
+  .hdr{flex-wrap:wrap}
+  .econ{grid-template-columns:1fr 1fr}
+  .tablewrap{overflow-x:auto}
+}
+</style>
+
+<!-- ============ PAGE 1 : THE STORY ============ -->
+<section class="page" aria-label="Page 1: The story">
+  <header class="hdr">
+    <img src="data:image/jpeg;base64,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" alt="Vi3W logo">
+    <div class="id">
+      <h1>Vi3W<span>.in</span></h1>
+      <p class="tag">Napkin sketch to game-ready 3D in 3 minutes, in the browser.</p>
+    </div>
+    <div class="meta">
+      <span>Stage</span><span><span class="pill">Pre-seed</span></span>
+      <span>Based</span><b>Mumbai, India</b>
+      <span>Founded</span><b>Sept 2024</b>
+      <span>Model</span><b>SaaS · B2B + prosumer</b>
+      <span>Web</span><b>vi3w.in</b>
+    </div>
+  </header>
+
+  <div class="kpis">
+    <div class="kpi"><span class="v num">400+</span><span class="l">Pilot users</span><span class="s">+100/month, pre-launch, $0 ad spend</span></div>
+    <div class="kpi"><span class="v num">30%</span><span class="l">Come back weekly</span><span class="s">Free pilot users, Oct 2026</span></div>
+    <div class="kpi"><span class="v num">1,900+</span><span class="l">3D generations</span><span class="s">3M+ organic Instagram views (30 days)</span></div>
+    <div class="kpi accent"><span class="v num">$500K</span><span class="l">Raising now</span><span class="s">SAFE / iSAFE · $3.3M post-money cap</span></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2><span class="n">01</span>Problem</h2>
+      <ul>
+        <li>Small game teams need hundreds of 3D assets. Most have <b>no dedicated 3D artist</b>.</li>
+        <li>Doing it in-house means Blender or Maya: <b>~3 months</b> to learn, <b>~$10K/seat</b> in hardware and licences, crashes that lose work.</li>
+        <li>Desktop 3D tools are single-user. Teammates wait in line for one file.</li>
+      </ul>
+      <div class="stat"><span class="big num">$180–1,000</span><span>per asset from a freelancer, incl. iterations, and <b>24+ hours</b> of waiting. Vi3W: <b>$19/mo</b> for up to 100 assets.</span></div>
+    </div>
+
+    <div class="card">
+      <h2><span class="n">02</span>Solution</h2>
+      <div class="flow">
+        <div class="step">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#D4F77C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c3-1 4-6 8-9s6-1 8-5"/><path d="M15 4l5 2-2 5"/></svg></span>
+          <h3>Sketch</h3><p>Draw on a napkin or in the canvas, add a one-line prompt.</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="step mid">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0B0B0C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></span>
+          <h3>AI builds it</h3><p>Image + 3D pipeline turns it into a textured model in <b>~3 min</b>.</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="step">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#D4F77C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M4 20h16"/></svg></span>
+          <h3>Edit &amp; ship</h3><p>Tweak in the browser, export to any format for the game engine.</p>
+        </div>
+      </div>
+      <div class="live"><span class="chip">Live: sketch-to-3D</span><span class="chip">Live: text-to-3D</span><span class="chip">Live: 3D editing + export</span><span class="chip next">Next: real-time team collaboration</span></div>
+    </div>
+
+    <div class="card">
+      <h2><span class="n">03</span>Why now</h2>
+      <ul>
+        <li><b>Open 3D models got good in 2025.</b> TRELLIS and Hunyuan3D made usable meshes from one image. A solo founder can now build what took a studio.</li>
+        <li><b>WebGPU ships in every major browser.</b> Real 3D editing runs without installs, licences or a gaming PC.</li>
+        <li><b>More games, same artists.</b> Steam releases rose from <b>14,111 (2023) to 19,008 (2025)</b>, mostly from small teams.</li>
+      </ul>
+    </div>
+
+    <div class="card dark">
+      <h2><span class="n">04</span>AI edge &amp; moat</h2>
+      <ul>
+        <li><b>Model-agnostic pipeline.</b> Each step routes to the best model (Hunyuan3D, TRELLIS, Flux, Nano Banana). Better models make Vi3W better, not obsolete.</li>
+        <li><b>Data:</b> sketch-to-model pairs from every generation. Individuals opt in to training. Company work is never used without consent.</li>
+        <li><b>Distribution:</b> 3M+ organic views and a 1,000-member Discord at <b>$0 paid acquisition</b>.</li>
+        <li><b>Lock-in (next):</b> one share link pulls the whole team in. Projects, versions and approvals live on Vi3W.</li>
+      </ul>
+      <p class="muted"><b style="color:var(--lime)">Why not a wrapper?</b> Generators output a mesh. Vi3W owns the work around it: sketch input, editing, export and team review. Swap the model, keep the workflow.</p>
+    </div>
+  </div>
+
+  <div class="card plain">
+    <h2><span class="n">05</span>Team</h2>
+    <div class="team">
+      <div class="founder">
+        <span class="avatar">AP</span>
+        <div>
+          <h3>Aman Porwal, 24 · Founder &amp; CEO · full-time</h3>
+          <ul style="margin-top:2px">
+            <li>Ex-<b>Product Manager, nRev.ai</b>. Built Vi3W's full sketch-to-3D pipeline solo.</li>
+            <li><b>Research Fellow, Manastu Space</b>. Project flew on ISRO's <b>PSLV-C60</b> (Dec 2024).</li>
+            <li>Ran 3D services for game studios in Europe and China: <b>$10K in 3 months</b>.</li>
+          </ul>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1.6mm">
+        <p><b>Backed by:</b> AI Grants India</p>
+        <p><b>First hires (this round):</b> 3D/ML engineer, full-stack engineer</p>
+        <p><b>Advisors:</b> <span class="tbd">TBD</span></p>
+        <div><p class="muted" style="font-size:7.6pt;margin-bottom:2px">Pilot users from teams at</p>
+          <div class="logos"><span>Google</span><span>Adobe</span><span>Sony</span><span>Manastu Space</span><span>Emergent</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>Aman Porwal</b> · Founder</span>
+    <span>aman07porwal@gmail.com</span>
+    <span>+91 83081 41311</span>
+    <span>vi3w.in</span>
+    <span class="pg">1 / 2</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 : THE BUSINESS ============ -->
+<section class="page" aria-label="Page 2: The business">
+  <div class="grid">
+    <div class="card">
+      <h2><span class="n">06</span>Market</h2>
+      <div class="mkt">
+        <svg viewBox="0 0 140 120" role="img" aria-label="TAM, SAM and SOM as nested circles">
+          <circle cx="70" cy="62" r="56" fill="#FFFFFF" stroke="#0B0B0C" stroke-width="1.5"/>
+          <circle cx="70" cy="80" r="38" fill="#D4F77C" stroke="#0B0B0C" stroke-width="1.5"/>
+          <circle cx="70" cy="98" r="18" fill="#0B0B0C"/>
+          <text x="70" y="24" text-anchor="middle" font-family="Urbanist,Arial,sans-serif" font-size="11" font-weight="800" fill="#0B0B0C">$520M</text>
+          <text x="70" y="62" text-anchor="middle" font-family="Urbanist,Arial,sans-serif" font-size="11" font-weight="800" fill="#0B0B0C">$120M</text>
+          <text x="70" y="102" text-anchor="middle" font-family="Urbanist,Arial,sans-serif" font-size="10" font-weight="800" fill="#D4F77C">$6M</text>
+        </svg>
+        <div>
+          <div class="mrow"><span class="k">TAM</span><div><span class="v">$520M/yr</span><div class="x">1.5M active game creators (Unity) × $348/yr</div></div></div>
+          <div class="mrow"><span class="k">SAM</span><div><span class="v">$120M/yr</span><div class="x">~200K small teams shipping games × $600/yr</div></div></div>
+          <div class="mrow"><span class="k">SOM</span><div><span class="v">$6M ARR</span><div class="x">10K paying teams = 5% of SAM in 3 yrs</div></div></div>
+        </div>
+      </div>
+      <p class="muted" style="font-size:7.6pt">Sources: 42matters (150K Play game devs), Steam 2025. <b style="color:var(--ink)">Next:</b> CAD + robotics sim data (unsized).</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="n">07</span>Traction</h2>
+      <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:3mm;align-items:center">
+        <svg viewBox="0 0 160 92" role="img" aria-label="Cumulative pilot users: July 100, August 200, September 300, October 400">
+          <line x1="8" y1="76" x2="156" y2="76" stroke="#0B0B0C" stroke-width="1"/>
+          <line x1="8" y1="51" x2="156" y2="51" stroke="#E2E6DA" stroke-width=".6"/>
+          <line x1="8" y1="26" x2="156" y2="26" stroke="#E2E6DA" stroke-width=".6"/>
+          <path d="M14 76V65.5a3 3 0 0 1 3-3h22a3 3 0 0 1 3 3V76z" fill="#0B0B0C"/>
+          <path d="M51 76V53a3 3 0 0 1 3-3h22a3 3 0 0 1 3 3V76z" fill="#0B0B0C"/>
+          <path d="M88 76V40.5a3 3 0 0 1 3-3h22a3 3 0 0 1 3 3V76z" fill="#0B0B0C"/>
+          <path d="M125 76V28a3 3 0 0 1 3-3h22a3 3 0 0 1 3 3V76z" fill="#D4F77C" stroke="#0B0B0C" stroke-width="1"/>
+          <g font-family="Urbanist,Arial,sans-serif" font-size="8" font-weight="800" fill="#0B0B0C" text-anchor="middle">
+            <text x="28" y="59">100</text><text x="65" y="46">200</text><text x="102" y="34">300</text><text x="139" y="21">400</text>
+          </g>
+          <g font-family="Urbanist,Arial,sans-serif" font-size="7.5" fill="#585E54" text-anchor="middle">
+            <text x="28" y="86">Jul</text><text x="65" y="86">Aug</text><text x="102" y="86">Sep</text><text x="139" y="86">Oct</text>
+          </g>
+          <text x="8" y="10" font-family="Urbanist,Arial,sans-serif" font-size="7.5" font-weight="700" fill="#585E54">Cumulative pilot users, 2026</text>
+        </svg>
+        <ul>
+          <li><b>30%</b> return weekly</li>
+          <li><b>1,000</b> Discord members</li>
+          <li><b>3.1M</b> IG views / 30 days</li>
+          <li><b>$10K</b> services, 3 mo</li>
+          <li>Export rate <span class="tbd">TBD</span></li>
+        </ul>
+      </div>
+      <div class="stat" style="background:var(--paper)"><span style="font-size:8.3pt"><b>“We face this problem every single day. Vi3W is a huge time and cost saving for us.”</b><br><span class="muted">Pilot user · <span class="tbd">TBD: name, role, studio</span></span></span></div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2><span class="n">08</span>Business model</h2>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Plan</th><th>Price</th><th>Credits / mo</th><th>Assets / mo</th><th>For</th></tr></thead>
+        <tbody>
+          <tr><td><b>Indie</b></td><td><b>$19</b></td><td>1,000</td><td>≤100</td><td>Solo</td></tr>
+          <tr><td><b>Pro</b></td><td><b>$29</b></td><td>3,500</td><td>≤600</td><td>Heavy use</td></tr>
+          <tr><td><b>Studio</b></td><td><b>$149</b></td><td>18,000</td><td>≤3,500</td><td>Teams</td></tr>
+        </tbody>
+      </table></div>
+      <div class="econ">
+        <div><span class="v">$0.08–1</span><span class="l">compute per generation</span></div>
+        <div><span class="v">~90%</span><span class="l">gross margin at pilot usage*</span></div>
+        <div><span class="v">~$0</span><span class="l">CAC to date, all organic</span></div>
+        <div><span class="v"><span class="tbd">TBD</span></span><span class="l">LTV, payback after 30 Oct launch</span></div>
+      </div>
+      <p class="muted" style="font-size:7.3pt">*~5 gens/user/mo × ~$0.30 vs $19+ plan. Verify post-launch.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="n">09</span>Competition</h2>
+      <div class="tablewrap"><table>
+        <thead><tr><th></th><th class="c">Sketch</th><th class="c">Fast</th><th class="c">Browser</th><th class="c">Team</th><th class="c">Games</th></tr></thead>
+        <tbody>
+          <tr class="us"><td>Vi3W</td><td class="c y">✓</td><td class="c y">✓</td><td class="c y">✓</td><td class="c">Q1 ’27</td><td class="c y">✓</td></tr>
+          <tr><td>Meshy · Tripo · Rodin</td><td class="c p">image</td><td class="c y">✓</td><td class="c y">✓</td><td class="c no">✗</td><td class="c y">✓</td></tr>
+          <tr><td>Kaedim</td><td class="c p">image</td><td class="c p">hours</td><td class="c y">✓</td><td class="c p">partial</td><td class="c y">✓</td></tr>
+          <tr><td>Spline</td><td class="c no">✗</td><td class="c p">partial</td><td class="c y">✓</td><td class="c y">✓</td><td class="c no">✗</td></tr>
+          <tr><td>Blender · Maya</td><td class="c no">✗</td><td class="c no">✗</td><td class="c no">✗</td><td class="c no">✗</td><td class="c y">✓</td></tr>
+          <tr><td>Freelancer</td><td colspan="5" class="p">$180–1,000 per asset, 24+ hrs per round</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:8pt;white-space:normal"><b>Our edge:</b> the only tool that starts from a rough sketch and keeps the whole team iterating on one model in the browser.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">10</span>Roadmap · next 18 months</h2>
+    <div class="tl">
+      <div class="done"><b>Oct ’26</b>Paid plans live, Pvt Ltd incorporated</div>
+      <div><b>Nov ’26</b>Public launch: Product Hunt, Reddit</div>
+      <div><b>Q1 ’27</b>Team collaboration live, 2 engineers hired</div>
+      <div><b>Q3 ’27</b><span class="hl">$25K MRR</span>, 600+ paying teams</div>
+      <div><b>Q1 ’28</b>First CAD / robotics sim pilot, raise seed</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2><span class="n">11</span>Go-to-market</h2>
+      <ul>
+        <li><b>Beachhead:</b> solo and small (&lt;10) mobile and indie game teams.</li>
+        <li><b>Product-led:</b> free tier → Indie/Pro. Inviting a teammate moves the account to Studio ($149).</li>
+        <li><b>Channels:</b> 3D reels (3M+ views), Reddit and Discord game-dev communities, Product Hunt launch Nov 2026.</li>
+      </ul>
+    </div>
+    <div class="card plain">
+      <h2><span class="n">12</span>Risks &amp; mitigation</h2>
+      <ul>
+        <li><b>Big players add sketch-to-3D.</b> Stay model-agnostic; own the team workflow single-user tools lack.</li>
+        <li><b>Model-provider cost and access.</b> Move core steps to self-hosted TRELLIS / Hunyuan3D; credits cap cost per plan.</li>
+        <li><b>Solo founder.</b> 2 engineering hires funded by this round; advisor search under way.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card dark">
+    <h2><span class="n">13</span>The ask</h2>
+    <div class="ask">
+      <div>
+        <div class="amt num">$500K</div>
+        <p style="font-size:8.2pt;margin-top:2px">SAFE / iSAFE · <b>$3.3M post-money cap</b><br><span class="muted">~20 months runway · burn today $1–2K/mo</span></p>
+      </div>
+      <div>
+        <div class="funds" role="img" aria-label="Use of funds: product and engineering 45%, compute 20%, growth 20%, operations 15%">
+          <div style="width:45%;background:#D4F77C;color:#0B0B0C">45%</div>
+          <div style="width:20%;background:#FFFFFF;color:#0B0B0C">20%</div>
+          <div style="width:20%;background:#8E9686;color:#0B0B0C">20%</div>
+          <div style="width:15%;background:#3A3F36;color:#FFFFFF">15%</div>
+        </div>
+        <div class="legend">
+          <span><i style="background:#D4F77C"></i>Product &amp; eng (2 hires)</span>
+          <span><i style="background:#FFFFFF"></i>GPU &amp; inference</span>
+          <span><i style="background:#8E9686"></i>Growth &amp; community</span>
+          <span><i style="background:#3A3F36"></i>Salary, ops, legal</span>
+        </div>
+        <p style="font-size:8.2pt;margin-top:1.8mm"><b style="color:var(--lime)">Unlocks:</b> <b>$25K MRR</b>, <b>600+ paying teams</b>, team collaboration shipped and a first CAD/robotics pilot, ready for a seed round.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <p class="vis">5-year vision: <span>start with game assets, then become where every physical object is designed in 3D first: game-ready, CAD-ready and simulation-ready for robotics.</span></p>
+    <span><b>Aman Porwal</b> · Founder, Vi3W</span>
+    <span>aman07porwal@gmail.com</span>
+    <span>+91 83081 41311</span>
+    <span>linkedin.com/in/aman-porwal-5933b120b</span>
+    <span class="pg">2 / 2</span>
+  </div>
+</section>
