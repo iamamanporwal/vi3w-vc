@@ -4,8 +4,8 @@ Companion to `vi3w-investor-brief.pdf`. For Aman only; do not send.
 
 ## Fix before sending
 
-1. **Get one attributed quote.** The current quote has no name. Ask one pilot user for first name, role and studio (or "Indie mobile dev, Berlin").
-2. **Measure export rate.** Track the % of generations downloaded or exported for 2 weeks and replace the `TBD`. It is your best quality metric.
+1. **Quote attribution.** Now credited to pilot teams at SkyWolf Studios and rTracer.com. Get written OK from both before sending.
+2. **Export rate is 50%.** Keep tracking it weekly; be ready to show how it is measured.
 3. **Check the pilot-logos wording.** It says "Pilot users from teams at Google, Adobe, Sony, Manastu Space, Emergent". Only keep a name if you can show a real user from that company on a call.
 4. **Confirm the instrument with a CA or lawyer.** An Indian Pvt Ltd cannot issue a US SAFE. Options are an iSAFE (CCPS), a convertible note, or a Delaware flip. Then update "SAFE / iSAFE".
 5. **Find 1–2 advisors.** Look for an ex-game-studio art lead or a 3D/graphics engineer. This is the cheapest fix for the solo-founder risk.
