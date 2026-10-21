@@ -7,6 +7,7 @@ import {Model3DScene} from '../scenes/Model3D';
 import {Delivery, Twist} from '../scenes/Messages';
 import {Finale} from '../scenes/Finale';
 import {End} from '../scenes/End';
+import {HERO_VO} from '../vo';
 
 // 80 s hero film at 30 fps. Every boundary sits on a beat of the 120 BPM guide (15 frames).
 export const HERO = [
@@ -50,7 +51,12 @@ export const Hero: React.FC<{music?: string | null}> = ({music}) => {
         from += s.d;
         return seq;
       })}
-      {music && <Audio src={staticFile(music)} />}
+      {music && <Audio src={staticFile(music)} volume={0.7} />}
+      {HERO_VO.filter((v) => v.file).map((v) => (
+        <Sequence key={v.id} name={v.id} from={v.at}>
+          <Audio src={staticFile(`audio/vo/${v.file}`)} />
+        </Sequence>
+      ))}
     </AbsoluteFill>
   );
 };
