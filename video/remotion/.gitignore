@@ -1,0 +1,7 @@
+node_modules
+out
+public/capture/*.mp4
+public/audio/guide.wav
+.agents
+.claude
+skills-lock.json

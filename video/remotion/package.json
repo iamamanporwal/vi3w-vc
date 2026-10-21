@@ -1,0 +1,31 @@
+{
+  "name": "vi3w-launch-video",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "studio": "remotion studio",
+    "still": "remotion still",
+    "render": "remotion render",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.6",
+    "@react-three/fiber": "^9.3.0",
+    "@remotion/cli": "^4.0.537",
+    "@remotion/fonts": "^4.0.537",
+    "@remotion/motion-blur": "^4.0.537",
+    "@remotion/noise": "^4.0.537",
+    "@remotion/paths": "^4.0.537",
+    "@remotion/three": "^4.0.537",
+    "@remotion/transitions": "^4.0.537",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "remotion": "^4.0.537",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.12",
+    "@types/three": "^0.180.0",
+    "typescript": "^5.9.3"
+  }
+}
